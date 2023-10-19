@@ -21,13 +21,13 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public void updateUser(int id, User user) {
+    public void updateUser(long id, User user) {
         entityManager.merge(user);
         entityManager.flush();
     }
 
     @Override
-    public void deleteUser(int id) {
+    public void deleteUser(long id) {
         User user = showUser(id);
 
         if (null == user) {
@@ -44,7 +44,7 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
-    public User showUser(int id) {
+    public User showUser(long id) {
         return entityManager.find(User.class, id);
     }
 

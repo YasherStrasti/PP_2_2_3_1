@@ -28,39 +28,39 @@ public class UserController {
     }
 
     @GetMapping("/users")
-    public String getUserPage(@RequestParam("id") int id, Model model) {
-        model.addAttribute("users", userService.showUser(id));
-        return "show";
+    public String getUserPage(@RequestParam("id") long id, Model model) {
+        model.addAttribute("user", userService.showUser(id));
+        return "showUser";
     }
 
     @GetMapping("/new")
     public String getNewUserPage(Model model) {
         model.addAttribute("user", new User());
-        return "new";
+        return "newUser";
     }
 
-    @GetMapping("/edit")
-    public String getEditUserPage(Model model, @RequestParam("id") int id) {
+    @PostMapping("/edit")
+    public String getEditUserPage(Model model, @RequestParam("id") long id) {
         model.addAttribute("user", userService.showUser(id));
-        return "edit";
+        return "editUser";
     }
 
-    @GetMapping("/delete")
-    public String deleteUser(@RequestParam(value = "id") int id) {
+    @PostMapping("/delete")
+    public String deleteUser(@RequestParam(value = "id") long id) {
         userService.deleteUser(id);
-        return "redirect:http://localhost:8080/";
+        return "redirect:http://localhost:8080/PP_2_2_3_war/";
     }
 
     @PostMapping()
     public String createUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
-        return "redirect:http://localhost:8080/";
+        return "redirect:http://localhost:8080/PP_2_2_3_war/";
     }
 
     @PostMapping("/update")
     public String updateUser(@ModelAttribute("user") User user,
-                             @RequestParam("id") int id) {
+                             @RequestParam("id") long id) {
         userService.updateUser(id, user);
-        return "redirect:http://localhost:8080/";
+        return "redirect:http://localhost:8080/PP_2_2_3_war/";
     }
 }

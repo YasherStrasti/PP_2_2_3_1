@@ -11,20 +11,19 @@ public class User {
     private Long id;
 
     @Column(name = "name")
-    private String firstName;
+    private String name;
 
     @Column(name = "lastName")
-    private String lastName;
+    private String surname;
 
 
     public User() {}
 
-    public User(String firstName, String lastName) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(String name, String surname) {
+        this.name = name;
+        this.surname = surname;
 
     }
-
 
     public Long getId() {
         return id;
@@ -34,30 +33,28 @@ public class User {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
-
-
 
     @Override
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
+                ", firstName='" + name + '\'' +
+                ", lastName='" + surname + '\'' +
                 '}';
     }
 }
