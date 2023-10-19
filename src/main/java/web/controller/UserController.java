@@ -48,19 +48,19 @@ public class UserController {
     @PostMapping("/delete")
     public String deleteUser(@RequestParam(value = "id") long id) {
         userService.deleteUser(id);
-        return "redirect:http://localhost:8080/PP_2_2_3_war/";
+        return "redirect:/users";
     }
 
     @PostMapping()
     public String createUser(@ModelAttribute("user") User user) {
         userService.saveUser(user);
-        return "redirect:http://localhost:8080/PP_2_2_3_war/";
+        return "redirect:/users";
     }
 
     @PostMapping("/update")
     public String updateUser(@ModelAttribute("user") User user,
                              @RequestParam("id") long id) {
         userService.updateUser(id, user);
-        return "redirect:http://localhost:8080/PP_2_2_3_war/";
+        return "redirect:/users";
     }
 }
