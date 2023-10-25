@@ -1,11 +1,14 @@
 package web.service;
 
 
+
 import web.dao.UserDao;
 import web.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.stereotype.Service;
+
+import javax.validation.Valid;
 import java.util.List;
 
 @Transactional
@@ -31,7 +34,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void saveUser(User user) {
+    public void saveUser(@Valid User user) {
         userDao.saveUser(user);
     }
 

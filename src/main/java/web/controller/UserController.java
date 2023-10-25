@@ -3,11 +3,11 @@ package web.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import web.model.User;
 import web.service.UserService;
-import java.util.List;
+import javax.validation.Valid;
 
 @Controller
 @RequestMapping
@@ -40,9 +40,18 @@ public class UserController {
     }
 
     @PostMapping("/edit")
-    public String getEditUserPage(Model model, @RequestParam("id") long id) {
+    public String getEditUserPage(@Valid Model model, @RequestParam("id") long id) {
         model.addAttribute("user", userService.showUser(id));
         return "editUser";
+    }
+    @PostMapping()
+    public String createUser(@ModelAttribute("user") @Valid User user, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            return "newUser";
+        }
+
+        userService.saveUser(user);
+        return "redirect:/";
     }
 
     @PostMapping("/delete")
@@ -51,15 +60,14 @@ public class UserController {
         return "redirect:/";
     }
 
-    @PostMapping()
-    public String createUser(@ModelAttribute("user") User user) {
-        userService.saveUser(user);
-        return "redirect:/";
-    }
 
     @PostMapping("/update")
-    public String updateUser(@ModelAttribute("user") User user,
+    public String updateUser(@ModelAttribute("user") @Valid User user,
+                             BindingResult bindingResult,
                              @RequestParam("id") long id) {
+        if (bindingResult.hasErrors()) {
+            return "editUser";
+        }
         userService.updateUser(id, user);
         return "redirect:/";
     }

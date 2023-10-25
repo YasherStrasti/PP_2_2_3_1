@@ -1,15 +1,18 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org" lang="en">
 <head>
     <meta charset="UTF-8">
     <title>New User</title>
 </head>
 <body>
 <form th:method="POST" th:action="@{/}" th:object="${user}">
-    <label for="name">Enter name</label>
-    <input type="text" th:field="*{name}" id="name">
+    <label for="name">Enter name: </label>
+    <input type="text" th:field="*{name}" id="name" required/>
+    <div style="color:red" th:if="${#fields.hasErrors('name')}" th:errors="*{name}">Name error</div>
+    <br/>
     <label for="surname">Enter surname</label>
-    <input type="text" th:field="*{surname}" id="surname">
+    <input type="text" th:field="*{surname}" id="surname" required/>
+    <div style="color:red" th:if="${#fields.hasErrors('surname')}" th:errors="*{surname}">Name error</div>
     <br/>
     <input type="Submit" value="Register">
 </form>
